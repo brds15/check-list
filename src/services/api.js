@@ -1,19 +1,10 @@
-export const getData = (cb) =>{
-  fetch('./data.json', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('data', data);
-      if (cb && typeof cb === 'function') {
-        cb();
-      }
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-      alert('Error to get data.');
-    });
-}
+import data from './data.json';
+
+export const getData = cb => {
+  setTimeout(() => {
+    const objData = { ...data };
+    if (cb && typeof cb === 'function') {
+      cb({ hasError: false, list: Object.entries(objData) });
+    }
+  }, 5000);
+};
