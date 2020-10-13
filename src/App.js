@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { getData } from './services/api';
+import List from './components/List';
 import './App.css';
 
 function App() {
@@ -12,7 +13,9 @@ function App() {
   });
   return (
     <div className="App">
-      <header className="App-header" />
+      <header className="App-header">
+        <List />
+      </header>
     </div>
   );
 }
