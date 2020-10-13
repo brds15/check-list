@@ -6,5 +6,5 @@ export const getData = cb => {
     if (cb && typeof cb === 'function') {
       cb({ hasError: false, list: Object.entries(objData) });
     }
-  }, 5000);
+  }, 3000);
 };

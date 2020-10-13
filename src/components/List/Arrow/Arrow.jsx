@@ -1,6 +1,6 @@
 import React from 'react';
-import arrowDown from '../../assets/down.svg';
-import arrowUp from '../../assets/up.svg';
+import arrowDown from '../../../assets/down.svg';
+import arrowUp from '../../../assets/up.svg';
 import './Arrow.scss';
 
 export default function Arrow({ type }) {

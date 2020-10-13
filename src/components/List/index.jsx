@@ -1,15 +1,11 @@
 import React from 'react';
-import Checkbox from '../Checkbox/index';
-import Arrow from './Arrow';
-import './List.scss';
+import Row from './Row/Row';
 
-export default function () {
+export default function List({ items = [] }) {
+  console.log('items', items);
   return (
-    <ul className="List">
-      <li>
-        <Checkbox>Richard Paul M.</Checkbox>
-        <Arrow />
-      </li>
+    <ul className="App-content-list">
+      <Row name={'lalalal'} />
     </ul>
   );
 }

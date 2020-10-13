@@ -1,20 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getData } from '../services/api';
 import List from './List';
 import '../Styles/App.scss';
 
 function App() {
+  const [items, setItems] = useState([]);
+
   useEffect(() => {
-    getData(res => {
-      const { hasError = true, list = {} } = res || {};
-      console.log('hasError', hasError);
-      console.log('list', list);
-    }, []);
-  });
+    if (items.length === 0) {
+      getData(res => {
+        const { hasError = true, list = [] } = res || {};
+        if (!hasError) {
+          setItems(list);
+        }
+      });
+    }
+  }, [items]);
+
   return (
     <div className="App">
       <div className="App-content">
-        <List />
+        <List items={items} />
       </div>
     </div>
   );
