@@ -1,0 +1,11 @@
+.Arrow {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  cursor: pointer;
+
+  .Arrow-img {
+    width: 18px;
+  }
+}

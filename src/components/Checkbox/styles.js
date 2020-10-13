@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 export const CheckboxContainer = styled.div`
   height: 35px;
-  padding-left: 5px;
-  margin: 0px 4px;
+  margin: 0px 4px 0 0;
   border-radius: 5px;
   background-color: ${props => (props.checked ? '#05386d' : 'transparent')};
   display: flex;
   align-items: center;
   cursor: pointer;
+  width: 90%;
 `;
 export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   overflow: hidden;
@@ -30,10 +30,12 @@ export const StyledCheckbox = styled.label`
   img {
     display: ${props => (props.checked ? 'flex' : 'none')};
     filter: invert(75%) sepia(11%) saturate(6042%) hue- rotate(30deg) brightness(105%) contrast(68%);
+    width: '15px';
   }
   cursor: pointer;
 `;
 export const Text = styled.label`
   cursor: pointer;
-  color: ${props => (props.checked ? '#FFF' : '#555')};
+  color: ${props => (props.checked ? '#fff' : '#868383')};
+  padding-left: 10px;
 `;

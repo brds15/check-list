@@ -1,10 +1,11 @@
 import React from 'react';
-import Checkbox from './Checkbox/index';
+import Checkbox from '../Checkbox/index';
 import Arrow from './Arrow';
+import './List.scss';
 
 export default function () {
   return (
-    <ul>
+    <ul className="List">
       <li>
         <Checkbox>Richard Paul M.</Checkbox>
         <Arrow />
