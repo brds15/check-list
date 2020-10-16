@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CheckIcon from '../../assets/check.svg';
 import { CheckboxContainer, HiddenCheckbox, StyledCheckbox, Text } from './styles';
 
-export default function Checkbox({ children }) {
-  const [checked, setChecked] = useState(false);
-
+export default function Checkbox({ children, handleChildren, isChecked, id, handleCheckStatus }) {
   function handleCheckboxChange() {
-    setChecked(!checked);
+    console.log('isChecked', isChecked);
+    console.log('id', id);
+    handleCheckStatus(id, isChecked)
+    handleChildren(isChecked);
   }
 
   return (
-    <CheckboxContainer checked={checked} onClick={handleCheckboxChange}>
-      <HiddenCheckbox onChange={handleCheckboxChange} checked={checked} />
-      <StyledCheckbox checked={checked}>
+    <CheckboxContainer checked={isChecked} onClick={handleCheckboxChange}>
+      <HiddenCheckbox onChange={handleCheckboxChange} checked={isChecked} />
+      <StyledCheckbox checked={isChecked}>
         <img alt="tick icon" src={CheckIcon} />
       </StyledCheckbox>
-      <Text checked={checked}> {children} </Text>
+      <Text checked={isChecked}> {children} </Text>
     </CheckboxContainer>
   );
 }

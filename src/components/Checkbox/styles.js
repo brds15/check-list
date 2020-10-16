@@ -3,7 +3,6 @@ export const CheckboxContainer = styled.div`
   height: 35px;
   margin: 0px 4px 0 0;
   border-radius: 5px;
-  background-color: ${props => (props.checked ? '#05386d' : 'transparent')};
   display: flex;
   align-items: center;
   cursor: pointer;
