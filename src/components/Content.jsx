@@ -19,7 +19,7 @@ export default function Content() {
       }
 
       const { level, id, name } = Object.assign(list);
-      const checkList = {
+      const newCheckableItem = {
         level: level,
         id: id,
         name: name,
@@ -28,7 +28,7 @@ export default function Content() {
         fatherId: fatherId
       };
 
-      handleFlatCheckList(checkList);
+      handleFlatCheckList(newCheckableItem);
     }
     return getFlatCheckList();
   }, []);
