@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { getData } from '../services/api';
 import List from './List';
-import { getFlatCheckList, handleFlatCheckList } from './CheckList';
+import { getFlatCheckList, handleFlatCheckList, handleChildrenCheckStatus } from './CheckList';
 import '../Styles/App.scss';
 
 export default function Content() {
@@ -34,19 +34,11 @@ export default function Content() {
   }, []);
 
   const handleChildren = useCallback(
-    fatherId => {
-      console.log('checkList', checkList);
-      console.log('fatherId', fatherId);
-    },
-    [checkList]
-  );
-
-  const handleCheckStatus = useCallback(
-    (id, status) => {
+    (id, isChecked) => {
       const list = [...checkList];
-      const index = checkList.findIndex(item => item.id === id);
-      list[index] = { ...list[index], isChecked: !status };
-      setCheckList([...list]);
+      const newList = handleChildrenCheckStatus(list, id, isChecked);
+
+      setCheckList([...newList]);
     },
     [checkList]
   );
@@ -69,7 +61,7 @@ export default function Content() {
         <List
           allItems={checkList}
           handleChildren={handleChildren}
-          handleCheckStatus={handleCheckStatus}
+          handleChildrenCheckStatus={handleChildrenCheckStatus}
         />
       </div>
     </div>
