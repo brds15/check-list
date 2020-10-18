@@ -61,7 +61,6 @@ export default function Content() {
         <List
           allItems={checkList}
           handleChildren={handleChildren}
-          handleChildrenCheckStatus={handleChildrenCheckStatus}
         />
       </div>
     </div>

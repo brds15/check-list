@@ -1,7 +1,7 @@
 import React from 'react';
 import Row from './Row/Row';
 
-export default function List({ allItems = [], handleChildrenCheckStatus, handleCheckStatus }) {
+export default function List({ allItems = [], handleChildren, handleCheckStatus }) {
   const buildRowItem = allItems => {
     const level0Items = allItems.filter(item => item.level === 0);
     return level0Items.map(item => {
@@ -22,7 +22,7 @@ export default function List({ allItems = [], handleChildrenCheckStatus, handleC
           isCollapsed={isCollapsed}
           fatherId={fatherId}
           level={level}
-          handleChildrenCheckStatus={handleChildrenCheckStatus}
+          handleChildren={handleChildren}
           handleCheckStatus={handleCheckStatus}
         />
       );

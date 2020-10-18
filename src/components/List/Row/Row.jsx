@@ -10,11 +10,11 @@ export default function Row({
   isChecked = false,
   isCollapsed = false,
   fatherId = '',
-  handleChildrenCheckStatus
+  handleChildren
 }) {
   return (
     <li className="Row">
-      <Checkbox isChecked={isChecked} handleChildrenCheckStatus={handleChildrenCheckStatus} id={id}>
+      <Checkbox isChecked={isChecked} handleChildren={handleChildren} id={id}>
         {name}
       </Checkbox>
       {!fatherId && <Arrow />}
