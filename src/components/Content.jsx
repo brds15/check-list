@@ -43,6 +43,17 @@ export default function Content() {
     [checkList]
   );
 
+  const handleCollapse = useCallback(
+    (status, id) => {
+      const list = [...checkList];
+      const index = checkList.findIndex(item => item.id === id);
+
+      list[index] = { ...list[index], isCollapsed: !status };
+      setCheckList([...list]);
+    },
+    [checkList]
+  );
+
   useEffect(() => {
     if (checkList && checkList.length === 0) {
       getData(res => {
@@ -61,6 +72,7 @@ export default function Content() {
         <List
           allItems={checkList}
           handleChildren={handleChildren}
+          handleCollapse={handleCollapse}
         />
       </div>
     </div>
