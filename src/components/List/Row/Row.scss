@@ -4,6 +4,23 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   padding: 6px 8px;
+
+  .Row-level {
+    width: 100%;
+  }
+
+  .Row-level-1 {
+    padding-left: 40px;
+  }
+  .Row-level-2 {
+    padding-left: 80px;
+  }
+  .Row-level-3 {
+    padding-left: 120px;
+  }
+  .Row-level-4 {
+    padding-left: 160px;
+  }
 }
 .Row:hover {
   background-color: #595656;

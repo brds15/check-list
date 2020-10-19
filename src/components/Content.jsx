@@ -6,7 +6,7 @@ import '../Styles/App.scss';
 
 export default function Content() {
   const [checkList, setCheckList] = useState([]);
-
+  const [showList, setShowList] = useState([]);
   const formatterList = useCallback((itemsList, fatherId = '') => {
     for (const key in itemsList) {
       const list = itemsList && key ? itemsList[key] : {};
@@ -23,6 +23,7 @@ export default function Content() {
         level: level,
         id: id,
         name: name,
+        hasChildren: Object.values(list.children).length > 0,
         isChecked: false,
         isCollapsed: false,
         fatherId: fatherId
@@ -50,8 +51,14 @@ export default function Content() {
 
       list[index] = { ...list[index], isCollapsed: !status };
       setCheckList([...list]);
+
+      const newChildrenList = checkList.filter(item => item.fatherId === id);
+      const fatherPosition = showList.findIndex(item => item.id === id);
+      let newShowList = [...showList];
+      newShowList.splice(fatherPosition + 1, 0, ...newChildrenList);
+      setShowList([...newShowList]);
     },
-    [checkList]
+    [checkList, showList]
   );
 
   useEffect(() => {
@@ -66,11 +73,19 @@ export default function Content() {
     }
   }, [checkList, formatterList]);
 
+  useEffect(() => {
+    if (showList.length === 0) {
+      const level0Items = checkList.filter(item => item.level === 0);
+      setShowList(level0Items);
+    }
+  }, [checkList, showList.length]);
+
   return (
     <div className="App">
       <div className="App-content">
         <List
           allItems={checkList}
+          showList={showList}
           handleChildren={handleChildren}
           handleCollapse={handleCollapse}
         />
