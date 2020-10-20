@@ -40,7 +40,7 @@ export default function Content() {
     return getFlatCheckList();
   }, []);
 
-  const handleChildren = useCallback(
+  const handleCheck = useCallback(
     (id, isChecked) => {
       const list = [...checkList];
       const newList = handleChildrenCheckStatus(list, id, isChecked);
@@ -85,11 +85,7 @@ export default function Content() {
   return (
     <div className="App">
       <div className="App-content">
-        <List
-          showList={checkList}
-          handleChildren={handleChildren}
-          handleCollapse={handleCollapse}
-        />
+        <List showList={checkList} handleCheck={handleCheck} handleCollapse={handleCollapse} />
       </div>
     </div>
   );

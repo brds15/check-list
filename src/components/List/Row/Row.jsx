@@ -10,13 +10,13 @@ export default function Row({
   isCollapsed = false,
   hasChildren = false,
   level = null,
-  handleChildren,
+  handleCheck,
   handleCollapse
 }) {
   return (
     <li className="Row">
       <div className={`Row-level Row-level-${level}`}>
-        <Checkbox isChecked={isChecked} handleChildren={handleChildren} id={id}>
+        <Checkbox isChecked={isChecked} handleCheck={handleCheck} id={id}>
           {name}
         </Checkbox>
       </div>

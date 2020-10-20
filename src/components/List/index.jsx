@@ -1,7 +1,7 @@
 import React from 'react';
 import Row from './Row/Row';
 
-export default function List({ handleChildren, handleCollapse, showList = [] }) {
+export default function List({ handleCheck, handleCollapse, showList = [] }) {
   const buildRowItem = () => {
     return showList.map(item => {
       const {
@@ -26,7 +26,7 @@ export default function List({ handleChildren, handleCollapse, showList = [] }) 
             fatherId={fatherId}
             hasChildren={hasChildren}
             level={level}
-            handleChildren={handleChildren}
+            handleCheck={handleCheck}
             handleCollapse={handleCollapse}
           />
         );
