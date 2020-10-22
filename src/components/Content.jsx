@@ -5,7 +5,8 @@ import {
   getFlatCheckList,
   handleFlatCheckList,
   handleChildrenCheckStatus,
-  sortList
+  sortList,
+  closeAllChildren
 } from './CheckList';
 import '../Styles/App.scss';
 
@@ -52,14 +53,21 @@ export default function Content() {
 
   const handleCollapse = useCallback(
     (status, id) => {
-      const newList = checkList.map(item => {
-        if (item.fatherId === id) {
-          let subItem = { ...item };
-          subItem = { ...subItem, isShowing: !subItem.isShowing };
-          return subItem;
-        }
-        return item;
-      });
+      const newStatus = !status;
+      let newList;
+
+      if (newStatus) {
+        newList = checkList.map(item => {
+          if (item.fatherId === id) {
+            let subItem = { ...item };
+            subItem = { ...subItem, isShowing: true };
+            return subItem;
+          }
+          return item;
+        });
+      } else {
+        newList = closeAllChildren([...checkList], id, newStatus);
+      }
 
       const index = checkList.findIndex(item => item.id === id);
       newList[index] = { ...newList[index], isCollapsed: !status };

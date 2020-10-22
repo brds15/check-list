@@ -22,7 +22,7 @@ export function handleChildrenCheckStatus(checkList, id, status) {
   const list = setItem(checkList, id, newStatus);
   const children = list.filter(item => item.fatherId === id) || [];
   let currentList = [...list];
-  
+
   if (children.length > 0) {
     for (const child of children) {
       const { id, isChecked } = child;
@@ -58,4 +58,39 @@ export function sortList(referenceList) {
   }
 
   return sortedList;
+}
+
+function closeByItem(list, currentItemId) {
+  let newFathers = [];
+  const closedList = list.map(item => {
+    const isChild = item.fatherId === currentItemId;
+
+    if (isChild) {
+      let subItem = { ...item };
+      const currentItemHasChild = list.find(child => child.fatherId === subItem.id);
+
+      if (!!currentItemHasChild) {
+        newFathers = [...newFathers, subItem.id];
+      }
+
+      subItem = { ...subItem, isShowing: false, isCollapsed: false };
+      return subItem;
+    }
+
+    return item;
+  });
+  return { closedList: closedList, fathersToCloseChildren: newFathers };
+}
+
+export function closeAllChildren(list, currentItemId) {
+  const { closedList, fathersToCloseChildren } = closeByItem(list, currentItemId);
+  let currentList = [...closedList];
+
+  if (fathersToCloseChildren.length > 0) {
+    for (const child of fathersToCloseChildren) {
+      currentList = closeAllChildren(currentList, child);
+    }
+  }
+
+  return [...currentList];
 }
