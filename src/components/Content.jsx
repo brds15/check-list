@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { getData } from '../services/api';
+import { getData } from '../services/Api/api';
 import List from './List';
 import {
   getFlatCheckList,
   handleFlatCheckList,
   handleChildrenCheckStatus,
   sortList,
-  closeAllChildren
+  closeAllChildren,
+  setRecovery,
+  getRecovery
 } from '../services/CheckList';
 import SpinnerLoading from './Common/SpinnerLoading';
 import { setLastPosition, getLastPosition } from '../services/ScrollYPostion';
@@ -88,16 +90,25 @@ export default function Content() {
 
   useEffect(() => {
     if (checkList && checkList.length === 0) {
-      getData(res => {
+      const recoveredList = getRecovery();
+      if (recoveredList.length > 0) {
         setIsLoading(false);
-        const { hasError = true, list = [] } = res || {};
-        if (!hasError) {
-          const formattedList = formatterList(list);
-          const sortedList = sortList(formattedList);
-          setCheckList(sortedList);
-          handleScrollPosition();
-        }
-      });
+        setCheckList([...recoveredList]);
+      } else {
+        getData(res => {
+          setIsLoading(false);
+          const { hasError = true, list = [] } = res || {};
+          if (!hasError) {
+            const formattedList = formatterList(list);
+            const sortedList = sortList(formattedList);
+            setCheckList(sortedList);
+          }
+        });
+      }
+      
+      return () => {
+        handleScrollPosition();
+      };
     }
   }, [checkList, formatterList, handleScrollPosition]);
 
@@ -108,6 +119,11 @@ export default function Content() {
       window.removeEventListener('scroll', setLastPosition);
     };
   }, []);
+
+  useEffect(() => {
+    const newCheckList = [...checkList];
+    setRecovery(newCheckList);
+  }, [checkList]);
 
   return (
     <div className="App">

@@ -1,3 +1,4 @@
+const keyName = 'CHECKLIST-LIST';
 let arrCheckList = [];
 let sortedList = [];
 
@@ -92,4 +93,13 @@ export function closeAllChildren(list, currentItemId) {
   }
 
   return [...currentList];
+}
+
+export function setRecovery(list) {
+  localStorage.setItem(keyName, JSON.stringify(list));
+}
+
+export function getRecovery() {
+  const recoveredList = JSON.parse(localStorage.getItem(keyName));
+  return !!recoveredList ? recoveredList : [];
 }
