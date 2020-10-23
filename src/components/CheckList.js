@@ -17,16 +17,15 @@ function setItem(checkList, id, status) {
   return list;
 }
 
-export function handleChildrenCheckStatus(checkList, id, status) {
-  const newStatus = !status;
+export function handleChildrenCheckStatus(checkList, id, newStatus) {
   const list = setItem(checkList, id, newStatus);
-  const children = list.filter(item => item.fatherId === id) || [];
+  const children = list.filter(item => item.fatherId === id);
   let currentList = [...list];
 
   if (children.length > 0) {
     for (const child of children) {
-      const { id, isChecked } = child;
-      currentList = handleChildrenCheckStatus(currentList, id, isChecked);
+      const { id } = child;
+      currentList = handleChildrenCheckStatus(currentList, id, newStatus);
     }
     return currentList;
   }

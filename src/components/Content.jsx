@@ -42,9 +42,10 @@ export default function Content() {
   }, []);
 
   const handleCheck = useCallback(
-    (id, isChecked) => {
+    (id, status) => {
+      const newStatus = !status;
       const list = [...checkList];
-      const newList = handleChildrenCheckStatus(list, id, isChecked);
+      const newList = handleChildrenCheckStatus(list, id, newStatus);
 
       setCheckList([...newList]);
     },
