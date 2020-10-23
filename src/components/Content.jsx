@@ -9,11 +9,17 @@ import {
   closeAllChildren
 } from '../services/CheckList';
 import SpinnerLoading from './Common/SpinnerLoading';
+import { setLastPosition, getLastPosition } from '../services/ScrollYPostion';
 import '../Styles/App.scss';
 
 export default function Content() {
   const [checkList, setCheckList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleScrollPosition = useCallback(() => {
+    const position = getLastPosition();
+    window.scroll(0, position);
+  }, []);
 
   const formatterList = useCallback((itemsList, fatherId = '') => {
     for (const key in itemsList) {
@@ -89,10 +95,19 @@ export default function Content() {
           const formattedList = formatterList(list);
           const sortedList = sortList(formattedList);
           setCheckList(sortedList);
+          handleScrollPosition();
         }
       });
     }
-  }, [checkList, formatterList]);
+  }, [checkList, formatterList, handleScrollPosition]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', setLastPosition, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', setLastPosition);
+    };
+  }, []);
 
   return (
     <div className="App">
