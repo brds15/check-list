@@ -7,7 +7,7 @@ import {
   handleChildrenCheckStatus,
   sortList,
   closeAllChildren
-} from './CheckList';
+} from '../services/CheckList';
 import '../Styles/App.scss';
 
 export default function Content() {
