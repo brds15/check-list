@@ -8,10 +8,12 @@ import {
   sortList,
   closeAllChildren
 } from '../services/CheckList';
+import SpinnerLoading from './Common/SpinnerLoading';
 import '../Styles/App.scss';
 
 export default function Content() {
   const [checkList, setCheckList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const formatterList = useCallback((itemsList, fatherId = '') => {
     for (const key in itemsList) {
@@ -81,6 +83,7 @@ export default function Content() {
   useEffect(() => {
     if (checkList && checkList.length === 0) {
       getData(res => {
+        setIsLoading(false);
         const { hasError = true, list = [] } = res || {};
         if (!hasError) {
           const formattedList = formatterList(list);
@@ -94,7 +97,11 @@ export default function Content() {
   return (
     <div className="App">
       <div className="App-content">
-        <List showList={checkList} handleCheck={handleCheck} handleCollapse={handleCollapse} />
+        {isLoading ? (
+          <SpinnerLoading />
+        ) : (
+          <List showList={checkList} handleCheck={handleCheck} handleCollapse={handleCollapse} />
+        )}
       </div>
     </div>
   );
