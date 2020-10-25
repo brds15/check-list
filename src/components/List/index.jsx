@@ -12,6 +12,7 @@ export default function List({ handleCheck, handleCollapse, showList = [] }) {
         fatherId = '',
         hasChildren = false,
         isShowing = false,
+        hasChildrenActivated = false,
         level = 0
       } = item || {};
 
@@ -26,6 +27,7 @@ export default function List({ handleCheck, handleCollapse, showList = [] }) {
             fatherId={fatherId}
             hasChildren={hasChildren}
             level={level}
+            hasChildrenActivated={hasChildrenActivated}
             handleCheck={handleCheck}
             handleCollapse={handleCollapse}
           />

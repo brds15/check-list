@@ -10,16 +10,34 @@ export function getFlatCheckList() {
   return [...arrCheckList];
 }
 
-function setItem(checkList, id, status) {
+function setCheckItem(checkList, id, status) {
   const list = [...checkList];
-  const index = checkList.findIndex(item => item.id === id);
+  const index = list.findIndex(item => item.id === id);
 
   list[index] = { ...list[index], isChecked: status };
+  
+  if (list[index] && list[index].fatherId) {
+    const fatherId = list[index].fatherId;
+    const fatherIndex = list.findIndex(item => item.id === fatherId);
+
+    if (status) {
+      const childrenList = list.filter(
+        item => item.fatherId === fatherId && item.isChecked === false
+      );
+      
+      if (childrenList.length === 0) {
+        list[fatherIndex] = { ...list[fatherIndex], hasChildrenActivated: false, isChecked: true };
+        return list;
+      }
+    }
+    list[fatherIndex] = { ...list[fatherIndex], hasChildrenActivated: true };
+    return list;
+  }
   return list;
 }
 
 export function handleChildrenCheckStatus(checkList, id, newStatus) {
-  const list = setItem(checkList, id, newStatus);
+  const list = setCheckItem(checkList, id, newStatus);
   const children = list.filter(item => item.fatherId === id);
   let currentList = [...list];
 

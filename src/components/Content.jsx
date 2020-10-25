@@ -40,6 +40,7 @@ export default function Content() {
         id: id,
         name: name,
         hasChildren: Object.values(list.children).length > 0,
+        hasChildrenActivated: false,
         isChecked: false,
         isCollapsed: false,
         fatherId: fatherId,
