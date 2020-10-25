@@ -29,7 +29,6 @@ export const StyledCheckbox = styled.label`
   img {
     display: ${props => (props.checked ? 'flex' : 'none')};
     filter: invert(75%) sepia(11%) saturate(6042%) hue- rotate(30deg) brightness(105%) contrast(68%);
-    width: '15px';
   }
   cursor: pointer;
 `;

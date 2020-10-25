@@ -9,9 +9,9 @@ export default function Checkbox({ children, handleCheck, isChecked, id, hasChil
       <HiddenCheckbox onChange={() => handleCheck(id, isChecked)} checked={isChecked} />
       <StyledCheckbox checked={isChecked}>
         {hasChildrenActivated ? (
-          <img alt="tick icon" src={MinusIcon} />
+          <img width={15} alt="tick icon" src={MinusIcon} />
         ) : (
-          <img alt="tick icon" src={CheckIcon} />
+          <img width={15} alt="tick icon" src={CheckIcon} />
         )}
       </StyledCheckbox>
       <Text checked={isChecked}> {children} </Text>
