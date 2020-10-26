@@ -15,7 +15,7 @@ function setCheckItem(checkList, id, status) {
   const index = list.findIndex(item => item.id === id);
 
   list[index] = { ...list[index], isChecked: status };
-  
+
   if (list[index] && list[index].fatherId) {
     const fatherId = list[index].fatherId;
     const fatherIndex = list.findIndex(item => item.id === fatherId);
@@ -24,11 +24,17 @@ function setCheckItem(checkList, id, status) {
       const childrenList = list.filter(
         item => item.fatherId === fatherId && item.isChecked === false
       );
-      
+
       if (childrenList.length === 0) {
         list[fatherIndex] = { ...list[fatherIndex], hasChildrenActivated: false, isChecked: true };
-        return list;
+      } else {
+        list[fatherIndex] = {
+          ...list[fatherIndex],
+          hasChildrenActivated: true,
+          isChecked: true
+        };
       }
+      return list;
     }
     list[fatherIndex] = { ...list[fatherIndex], hasChildrenActivated: true };
     return list;
