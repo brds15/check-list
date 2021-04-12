@@ -1,4 +1,4 @@
-The objective of project is:
+## The objective of project is:
 - Render a list of people from a fake API
 - This list must be rended too in mode responsive for mobile
 - When a father is checked, those children must be checked
