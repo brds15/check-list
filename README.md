@@ -1,5 +1,14 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The objective of project is:
+- Render a list of people from a fake API
+- This list must be rended too in mode responsive for mobile
+- When a father is checked, those children must be checked
+- When all children are not checked, this father must be does not checked
+- When all children are checked, this father must be does checked
+- When just some children are not checked,  father will must has "-" as icon
 
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Objective 
 ## To configure this project
 Install dependencies...
 ### `yarn install`
